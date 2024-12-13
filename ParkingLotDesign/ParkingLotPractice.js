@@ -158,3 +158,26 @@ floor1.updateDisplayBoard();
 //Collect Ticket"
 new ExitGate(1).collectTicketPayment(ticket);
 floor1.updateDisplayBoard();
+
+// Adding a second floor
+const floor2 = new ParkingFloor(2);
+lot.addFloor(floor2);
+
+// Adding parking spots to the second floor
+floor2.addParkingSpot(new ParkingSpot(1, 2, "Compact"));
+floor2.addParkingSpot(new ParkingSpot(2, 2, "Large"));
+floor2.addParkingSpot(new ParkingSpot(3, 2, "Electric", true));
+
+floor2.updateDisplayBoard();
+
+// Parking a second vehicle on the second floor
+const vehicle2 = new Vehicle("KA14XY1234", "Electric");
+const spot2 = floor2.spots.find((s) => s.type === "Electric" && s.isAvailable);
+
+const ticket2 = new EntranceGate(2).issueTicket(vehicle2, spot2);
+
+floor2.updateDisplayBoard();
+
+// Collect ticket payment for the second vehicle
+new ExitGate(2).collectTicketPayment(ticket2);
+floor2.updateDisplayBoard();
